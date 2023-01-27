@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # check_my_weather
 
 This template should help get you started developing with Vue 3 in Vite.
@@ -27,3 +28,6 @@ npm run dev
 ```sh
 npm run build
 ```
+=======
+# CheckMyWeather
+>>>>>>> 2a3c7d5980b527ce3b4cb7a4f3e0a9fb5db71ae5
