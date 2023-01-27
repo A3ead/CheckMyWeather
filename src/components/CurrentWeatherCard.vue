@@ -1,0 +1,67 @@
+<template>
+    <div class="current-card-container">
+        <div class="current-card-header">
+            <div class="current-card-header-left">
+                <span style="font-size: x-large;">Current Weather:</span>
+                <span style="font-size: x-large; color: var(--main-header-color);">MONDAY</span>
+                <span style="font-size: x-large;">23.01.2023</span>
+            </div>
+            <div class="current-card-header-right">
+                <div class="current-card-img-container">
+                    <img class="current-card-img" src="https://www.pngall.com/wp-content/uploads/2016/07/Sun-PNG-Picture.png">
+                </div>
+                <div class="current-card-temp">
+                    <span>Current Temp.: {{forecastData.current.temp_c}} °C</span>
+                    <span>Real Feel: {{forecastData.current.feelslike_c}} °C</span>
+                </div>
+            </div>
+        </div>
+        <div class="card-seperator"></div>
+        <div class="current-card-bottom-container">
+            <div class="current-card-bottom-left">
+            <span>Precipitation:</span>
+            <span>Humidity:</span>
+            <span>Wind Speed:</span>
+            <span>Wind Direction:</span>
+            <span>Visibility:</span>
+            <span>Pressure:</span>
+        </div>
+        <div class="current-card-bottom-right">
+            <span>{{forecastData.current.precip_mm}} mm</span>
+            <span>{{forecastData.current.humidity}}%</span>
+            <span>{{forecastData.current.wind_kph}} km/h</span>
+            <span>{{forecastData.current.wind_dir}}</span>
+            <span>{{forecastData.current.vis_km}} km</span>
+            <span>{{forecastData.current.pressure_mb}} mb</span>
+        </div>
+        </div>
+
+    </div>
+</template>
+
+<script>
+
+
+export default{
+    props:{
+        CurrentWeather: {}
+    },
+    data(){
+        return{
+            
+        }
+    },
+    methods:{
+
+    },
+    mounted(){
+
+    },
+    computed:{
+        forecastData(){return this.$store.getters.forecastDataGetter}
+    }
+}
+
+</script>
+
+

@@ -1,0 +1,121 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
+
+
+
+#nav {
+  margin-left: 25px;
+  display: flex;
+}
+
+#nav a {
+  padding: 15px;
+  border: solid 1pxvar(--main-text-color);;
+  font-weight: bold;
+  color: #ffffff;
+  height: clamp(15px, 19px, 19px);
+}
+
+#nav a.router-link-exact-active {
+  background-color: rgba(255, 255, 255, 0.205);
+  border-radius: 10px;
+}
+
+#nav a:hover{
+  background-color: rgba(255, 255, 255, 0.411);
+  border-radius: 10px;
+
+}
+
+a {
+  text-decoration: none;
+  color: var(--main-text-color);
+}
+a:hover {
+  color: var(--main-text-color);
+}
+
+
+
+body::-webkit-scrollbar{
+  background-color: #f7f6fb00;
+  width: 0.7rem;
+}
+body::-webkit-scrollbar-thumb{
+  background-color: var( --main-header-color);
+  border-radius: 7px;
+}
+body::-webkit-scrollbar-thumb:hover{
+  background-color: var( --main-header-color);
+}
+.hidden-scrollbar::-webkit-scrollbar{
+  width: 0px;
+}
+
+
+
+
+.website-header {   
+    background-color: rgb(219, 94, 94);
+    padding: 15px;
+    margin-bottom: 20px;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    position: sticky;
+    top: 0px;
+    z-index: 999;
+    height: 65px;
+}
+
+.title-and-menu {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 50%;
+}
+.website-title {
+  font-size: x-large;
+}
+
+.menu-item
+{
+    color: white;
+    margin-right: 10px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.searchbar{
+  width: 50%;
+  display: flex;
+}
+
+.search-input
+{
+    color: var(--main-button-text-color);
+    padding: 15px;
+    background-color: var(--main-card-bg-color);
+    border: none;
+    border-radius: 10px;
+    width: 200px;
+    transition: width 0.2s;
+    
+}
+
+.search-input-focus {
+    width: 400px;
+    outline: none;
+    padding: 15px;
+    background-color: var(--main-card-bg-color);
+    border: none;
+    transition: all 0.2s;
+    
+}
+.search-input:focus{
+    outline: none;
+    width: 400px;
+}
