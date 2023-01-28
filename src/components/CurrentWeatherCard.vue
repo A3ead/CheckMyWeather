@@ -1,5 +1,5 @@
 <template>
-    <div class="current-card-container">
+    <div v-if="forecastData.current" class="current-card-container">
         <div class="current-card-header">
             <div class="current-card-header-left">
                 <span style="font-size: x-large;">Current Weather:</span>
@@ -44,7 +44,7 @@
 
 export default{
     props:{
-        CurrentWeather: {}
+        
     },
     data(){
         return{
@@ -58,7 +58,7 @@ export default{
 
     },
     computed:{
-        forecastData(){return this.$store.getters.forecastDataGetter}
+        forecastData(){console.log(this.$store.getters.forecastDataGetter);return this.$store.getters.forecastDataGetter}
     }
 }
 

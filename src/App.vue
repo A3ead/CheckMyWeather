@@ -9,7 +9,7 @@
       </div>
     </div>
       <div class="searchbar">
-        <input type="text" id='search' :class="[{'search-input-focus':searchDropDown},'search-input']" v-model="userInput" autocomplete = 'off' @keydown.enter="sendSearch()" placeholder="Search City ..">
+        <!-- <input type="text" id='search' :class="[{'search-input-focus':searchDropDown},'search-input']" v-model="userInput" autocomplete = 'off' @keydown.enter="sendSearch()" placeholder="Search City .."> -->
       </div>
 
   </div>
@@ -23,6 +23,7 @@
 
 <script>
 import { RouterLink, RouterView } from 'vue-router'
+import axios from 'axios'
 
 export default{
     data(){
@@ -31,10 +32,16 @@ export default{
         }
     },
     methods:{
-        
+      getForecast(){
+            axios.get(`http://localhost:3000/ip`)
+            .then(res=>{
+                this.$store.commit('changeForecastData', res.data)
+                console.log(res.data)
+            })
+        }
     },
     mounted(){
-
+      this.getForecast()
     }
 }
 </script>

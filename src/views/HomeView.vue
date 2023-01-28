@@ -29,14 +29,12 @@ export default{
             .then(res=>{
                 console.log(res.data)
             })
-        }
+        },
+
     },
     mounted(){
-        axios.get(`http://localhost:3000/ip`)
-        .then(res=>{
-            this.$store.commit('changeForecastData', res.data)
-            console.log(res.data)
-        })
+
+
     },
     computed:{
         forecastData(){return this.$store.getters.forecastDataGetter}
