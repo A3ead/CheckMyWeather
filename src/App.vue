@@ -23,7 +23,6 @@
 
 <script>
 import { RouterLink, RouterView } from 'vue-router'
-import axios from 'axios'
 
 export default{
     data(){
@@ -32,12 +31,12 @@ export default{
         }
     },
     methods:{
-      getForecast(){
-            axios.get(`http://localhost:3000/ip`)
-            .then(res=>{
-                this.$store.commit('changeForecastData', res.data)
-                console.log(res.data)
-            })
+      async getForecast(){
+
+        const request = await fetch('/api/getWeather')
+        const response = await request.json()
+        this.$store.commit('changeForecastData', response)
+        console.log(response)
         }
     },
     mounted(){

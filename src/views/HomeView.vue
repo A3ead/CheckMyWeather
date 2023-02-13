@@ -9,7 +9,6 @@
 
 <script>
 
-import axios from 'axios'
 import CurrentWeatherCard from '@/components/CurrentWeatherCard.vue'
 import DayWeatherCard from '@/components/DayWeatherCard.vue'
 
@@ -24,12 +23,6 @@ export default{
         }
     },
     methods:{
-        testfunction(){
-            axios.get(`http://localhost:3000/daily`)
-            .then(res=>{
-                console.log(res.data)
-            })
-        },
 
     },
     mounted(){
@@ -37,7 +30,6 @@ export default{
 
     },
     computed:{
-        forecastData(){return this.$store.getters.forecastDataGetter}
     }
 }
 
