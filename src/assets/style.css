@@ -44,12 +44,13 @@ body {
   height: 650px;
   width: 450px;
   border: 1px solid white;
-  border-radius: 5px
+  border-radius: 5px;
+  box-shadow: -5px 2px 6px black;
 }
 
 .current-card-header{
   display: flex;
-  height: 40%;
+  height: 35%;
 }
 
 
@@ -72,21 +73,19 @@ body {
 
 .current-card-img-container{
   display: flex;
-  height: 60%;
+  height: 65%;
   align-items: center;
   justify-content: center;
 }
 .current-card-img{
-  height: 100px;
-  width: 100px;
+  height: 90px;
+  width: 90px;
   /* background-color: var(--main-card-bg-color); */
 }
 
 .current-card-temp{
   display: flex;
   flex-direction: column;
-  /* align-items: center; */
-  /* gap: 20px; */
   align-items: center;
   text-align: left;
   justify-content: space-evenly;
@@ -102,14 +101,14 @@ body {
   border: 1px solid #000;
     margin-top: 10px;
     align-self: center;
-    width: 75%
+    width: 75%;
+    box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.233);
 }
 
 .current-card-bottom-container{
   display: flex;
-  margin-left: 40px;
-  height: 60%;
-
+  justify-content: center;
+  height: 65%;
 }
 
 .current-card-bottom-left{
@@ -117,7 +116,7 @@ body {
   flex-direction: column;
   justify-content: space-evenly;
   text-align: left;
-  width: 50%;
+  width: 60%;
   
 }
 
@@ -126,5 +125,47 @@ body {
   flex-direction: column;
   justify-content: space-evenly;
   text-align: left;
-  width: 50%;
+}
+
+.daily-card-bottom-container{
+  display: flex;
+  flex-direction: column;
+  height: 65%;
+  overflow: auto;
+}
+
+.daily-card-bottom-data{
+  display: flex;
+  justify-content: center;
+  min-height: 85%
+}
+
+.daily-card-bottom-left{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  text-align: left;
+  width: 60%;
+  
+}
+
+.daily-card-bottom-right{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  text-align: left;
+}
+
+.sun-moon{
+  min-height: 30%;
+  display: flex;
+  align-items: center;
+}
+
+.sun-moon-left .sun-moon-right{
+  display: flex;
+    flex-direction: column;
+    width: 50%;
+    height: 100%;
+    justify-content: space-evenly;
 }

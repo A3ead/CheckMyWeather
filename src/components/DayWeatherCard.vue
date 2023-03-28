@@ -8,34 +8,48 @@
             </div>
             <div class="current-card-header-right">
                 <div class="current-card-img-container">
-                    <img class="current-card-img" src="https://www.pngall.com/wp-content/uploads/2016/07/Sun-PNG-Picture.png">
+                    <img class="current-card-img" v-bind:src="forecastData.forecast.forecastday[0].day.condition.icon">
                 </div>
                 <div class="daily-card-temp">
-                    <span>{{forecastData.forecast.forecastday[0].day.maxtemp_c}}/{{forecastData.forecast.forecastday[0].day.mintemp_c}} °C</span>
+                    <span>{{forecastData.forecast.forecastday[0].day.maxtemp_c}} / {{forecastData.forecast.forecastday[0].day.mintemp_c}} °C</span>
                 </div>
             </div>
         </div>
         <div class="card-seperator"></div>
-        <div class="current-card-bottom-container">
-            <div class="current-card-bottom-left">
-            <span>Avg. Temperature:</span>
-            <span>Total Precipitation:</span>
-            <span>Avg. Humidity:</span>
-            <span>Max Wind Speed:</span>
-            <span>Avg. Visibility:</span>
-            <span>Chance of Rain:</span>
-            <span>Chance of Snow:</span>
+        <div class="daily-card-bottom-container">
+            <div class="daily-card-bottom-data">
+                <div class="daily-card-bottom-left">
+                    <span>Avg. Temperature:</span>
+                    <span>Total Precipitation:</span>
+                    <span>Avg. Humidity:</span>
+                    <span>Max Wind Speed:</span>
+                    <span>Avg. Visibility:</span>
+                    <span>Chance of Rain:</span>
+                    <span>Chance of Snow:</span>
+                </div>
+                <div class="daily-card-bottom-right">
+                    <span>{{forecastData.forecast.forecastday[0].day.avgtemp_c}} °C</span>
+                    <span>{{forecastData.forecast.forecastday[0].day.totalprecip_mm}} mm</span>
+                    <span>{{forecastData.forecast.forecastday[0].day.avghumidity}}%</span>
+                    <span>{{forecastData.forecast.forecastday[0].day.maxwind_kph}} km/h</span>
+                    <span>{{forecastData.forecast.forecastday[0].day.avgvis_km}} km</span>
+                    <span>{{forecastData.forecast.forecastday[0].day.daily_chance_of_rain}}%</span>
+                    <span>{{forecastData.forecast.forecastday[0].day.daily_chance_of_snow}}%</span>
+                </div>
+            </div>
+            <div class="card-seperator"></div>
+            <div class="sun-moon">
+                <div class="sun-moon-left">
+                    <span>Sunrise: {{forecastData.forecast.forecastday[0].astro.sunrise}}</span>
+                    <span>Sunset: {{forecastData.forecast.forecastday[0].astro.sunset}}</span>
+                </div>
+                <div class="sun-moon-right">
+                    <span>Moonrise: {{forecastData.forecast.forecastday[0].astro.moonrise}}</span>
+                    <span>Moonset: {{forecastData.forecast.forecastday[0].astro.moonset}}</span>
+                </div>
+            </div>
         </div>
-        <div class="current-card-bottom-right">
-            <span>{{forecastData.forecast.forecastday[0].day.avgtemp_c}} °C</span>
-            <span>{{forecastData.forecast.forecastday[0].day.totalprecip_mm}} mm</span>
-            <span>{{forecastData.forecast.forecastday[0].day.avghumidity}}%</span>
-            <span>{{forecastData.forecast.forecastday[0].day.maxwind_kph}} km/h</span>
-            <span>{{forecastData.forecast.forecastday[0].day.avgvis_km}} km</span>
-            <span>{{forecastData.forecast.forecastday[0].day.daily_chance_of_rain}}%</span>
-            <span>{{forecastData.forecast.forecastday[0].day.daily_chance_of_snow}}%</span>
-        </div>
-        </div>
+        
 
     </div>
 </template>

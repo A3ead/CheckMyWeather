@@ -3,12 +3,12 @@
         <div class="current-card-header">
             <div class="current-card-header-left">
                 <span style="font-size: x-large;">Current Weather:</span>
-                <span style="font-size: x-large; color: var(--main-header-color);">{{ findDay()[0] }}</span>
+                <span style="font-size: x-large; color: var(--main-header-color);">{{ forecastData.location.name }}, {{ forecastData.location.country}}</span>
                 <span style="font-size: x-large;">{{ findDay()[1] }}</span>
             </div>
             <div class="current-card-header-right">
                 <div class="current-card-img-container">
-                    <img class="current-card-img" src="https://www.pngall.com/wp-content/uploads/2016/07/Sun-PNG-Picture.png">
+                    <img class="current-card-img" v-bind:src="forecastData.current.condition.icon">
                 </div>
                 <div class="current-card-temp">
                     <span>Current Temp.: {{forecastData.current.temp_c}} °C</span>

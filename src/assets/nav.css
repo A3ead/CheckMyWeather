@@ -52,6 +52,21 @@ body::-webkit-scrollbar-thumb:hover{
   width: 0px;
 }
 
+.daily-card-bottom-container::-webkit-scrollbar{
+  background-color: #f7f6fb00;
+  width: 0.4rem;
+}
+.daily-card-bottom-container::-webkit-scrollbar-thumb{
+  background-color: var( --main-header-color);
+  border-radius: 7px;
+}
+.daily-card-bottom-container::-webkit-scrollbar-thumb:hover{
+  background-color: var( --main-header-color);
+}
+.hidden-scrollbar::-webkit-scrollbar{
+  width: 0px;
+}
+
 
 
 
