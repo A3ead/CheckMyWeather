@@ -40,12 +40,19 @@
             <div class="card-seperator"></div>
             <div class="sun-moon">
                 <div class="sun-moon-left">
-                    <span>Sunrise: {{forecastData.forecast.forecastday[0].astro.sunrise}}</span>
-                    <span>Sunset: {{forecastData.forecast.forecastday[0].astro.sunset}}</span>
+                    <img class="sun-moon-img" src="//cdn.weatherapi.com/weather/64x64/day/113.png">
+                    <div class="sun-moon-data-container">
+                        <span>Sunrise: {{forecastData.forecast.forecastday[0].astro.sunrise}}</span>
+                        <span>Sunset: {{forecastData.forecast.forecastday[0].astro.sunset}}</span>
+                    </div>
+
                 </div>
                 <div class="sun-moon-right">
-                    <span>Moonrise: {{forecastData.forecast.forecastday[0].astro.moonrise}}</span>
-                    <span>Moonset: {{forecastData.forecast.forecastday[0].astro.moonset}}</span>
+                    <img class="sun-moon-img" src="//cdn.weatherapi.com/weather/64x64/night/113.png">
+                    <div class="sun-moon-data-container">
+                        <span>Moonrise: {{forecastData.forecast.forecastday[0].astro.moonrise}}</span>
+                        <span>Moonset: {{forecastData.forecast.forecastday[0].astro.moonset}}</span>
+                    </div>
                 </div>
             </div>
         </div>

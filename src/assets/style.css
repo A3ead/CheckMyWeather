@@ -157,15 +157,25 @@ body {
 }
 
 .sun-moon{
-  min-height: 30%;
+  min-height: 40%;
   display: flex;
-  align-items: center;
 }
 
 .sun-moon-left, .sun-moon-right{
     display: flex;
     flex-direction: column;
     width: 50%;
-    height: 100%;
-    justify-content: space-evenly;
+    align-items: center;
+}
+
+.sun-moon-img{
+  height: 90px;
+  width: 90px;
+}
+
+.sun-moon-data-container{
+  height: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
 }
