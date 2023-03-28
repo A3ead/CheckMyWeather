@@ -162,8 +162,8 @@ body {
   align-items: center;
 }
 
-.sun-moon-left .sun-moon-right{
-  display: flex;
+.sun-moon-left, .sun-moon-right{
+    display: flex;
     flex-direction: column;
     width: 50%;
     height: 100%;
