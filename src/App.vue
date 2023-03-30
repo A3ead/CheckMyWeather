@@ -11,7 +11,7 @@
       <div id='search-dropdown-parent' class="search-dropdown-parent">
         <input type="text" id='search' :class="[{'search-input-focus':searchDropDown},'search-input']" v-model="userInput" autocomplete = 'off' @keydown.enter="sendSearch()" placeholder="Search City ..">
         <div v-if="searchDropDown==true" class="search-dropdown" tabindex="0">
-          <div @click="getForecast(city.name)" class="search-dropdown-result" v-for="city in searchResults" :key="city">{{city.name}}, {{city.country}}</div>
+          <div @click="getForecast(city.name + ', ' + city.country)" class="search-dropdown-result" v-for="city in searchResults" :key="city">{{city.name}}, {{city.country}}</div>
         </div>
       </div>
 
@@ -60,9 +60,11 @@ export default{
         }
       },
 
-        sendSearch(){
-
-        }
+      async sendSearch(){
+        console.log(this.userInput)
+        await this.citySearch(this.userInput)
+        this.getForecast(this.searchResults[0].name)
+      }
     },
     mounted(){
       this.getForecast()
@@ -73,7 +75,6 @@ export default{
         setTimeout(()=>{
           if(this.userInput.trim().length > 2)
           {
-            console.log(this.userInput, this.userInput.length)
             this.searchDropDown = true
           }
         },1000)
