@@ -10,7 +10,9 @@
     </div>
       <div id='search-dropdown-parent' class="search-dropdown-parent">
         <input type="text" id='search' :class="[{'search-input-focus':searchDropDown},'search-input']" v-model="userInput" autocomplete = 'off' @keydown.enter="sendSearch()" placeholder="Search City ..">
-        <div v-if="searchDropDown==true" class="search-dropdown" tabindex="0"><SearchDropdown :searchResults='searchResults'/></div>
+        <div v-if="searchDropDown==true" class="search-dropdown" tabindex="0">
+          <div @click="getForecast(city.name)" class="search-dropdown-result" v-for="city in searchResults" :key="city">{{city.name}}, {{city.country}}</div>
+        </div>
       </div>
 
   </div>
@@ -24,23 +26,23 @@
 
 <script>
 import { RouterLink, RouterView } from 'vue-router'
-import SearchDropdown from '@/components/SearchDropdown.vue'
 
 export default{
     components:{
-      SearchDropdown
+      
     },
     data(){
         return{
           searchDropDown: false,
           searchResults:[],
-          userInput:null,
+          userInput:'',
+          timer:null,
         }
     },
     methods:{
-      async getForecast(){
+      async getForecast(city = 'auto:ip'){
 
-        const request = await fetch('/api/getWeather')
+        const request = await fetch(`/api/getWeather?q=${city}`)
         const response = await request.json()
         this.$store.commit('changeForecastData', response)
         console.log(response)
@@ -67,12 +69,20 @@ export default{
 
       let searchTab = document.getElementById('search')
       searchTab.addEventListener('keydown',event=>{
-        this.searchDropDown = true
+
+        setTimeout(()=>{
+          if(this.userInput.trim().length > 2)
+          {
+            console.log(this.userInput, this.userInput.length)
+            this.searchDropDown = true
+          }
+        },1000)
+
         clearTimeout(this.timer)
         this.timer = setTimeout(()=>{this.citySearch(this.userInput)},500)
       })
       searchTab.addEventListener('focus',event=>{
-        if(this.userInput != '')
+        if(this.userInput.trim().length > 2)
         {
           setTimeout(()=>{this.searchDropDown = true},200)
         }
