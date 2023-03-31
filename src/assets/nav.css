@@ -93,6 +93,7 @@ body::-webkit-scrollbar-thumb:hover{
     top: 0px;
     z-index: 999;
     height: 65px;
+    min-width: 750px;
 }
 
 .title-and-menu {

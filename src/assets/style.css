@@ -33,15 +33,16 @@ body {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  height: 822px;
+  height: 88%;
+  width: 100%;
 }
 
 .current-card-container{
   display: flex;
   flex-direction: column;
 
-  height: 650px;
-  width: 450px;
+  height: 100%;
+  width: 100%;
   border: 1px solid white;
   border-radius: 5px;
   box-shadow: 0px 0px 20px black;
@@ -177,4 +178,25 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
+}
+
+.single-card-container{
+  height: 83%;
+  width: 22.5%;
+  min-width: 235px;
+}
+
+.daily-weather-title{
+  background: #27272a82;
+  padding: 10px;
+  border-radius: 10px;
+  font-size: large;
+}
+
+.title-and-cards-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 822px;
 }

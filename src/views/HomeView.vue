@@ -1,7 +1,10 @@
 <template>
-    <div class="cards-container">
-        <CurrentWeatherCard/>
-        <DayWeatherCard/>
+    <div class="title-and-cards-container">
+        <div v-if="forecastData.forecast" class="daily-weather-title">Current and Today's weather in <span style="color: var(--main-header-color);">{{ forecastData.location.name }}, {{ forecastData.location.country }}</span></div>
+        <div class="cards-container">
+            <CurrentWeatherCard class="single-card-container"/>
+            <DayWeatherCard class="single-card-container"/>
+         </div>
     </div>
 
 
@@ -30,6 +33,7 @@ export default{
 
     },
     computed:{
+        forecastData(){return this.$store.getters.forecastDataGetter}
     }
 }
 

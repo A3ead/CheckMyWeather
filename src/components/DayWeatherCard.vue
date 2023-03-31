@@ -2,7 +2,7 @@
     <div v-if="forecastData.forecast" class="current-card-container">
         <div class="current-card-header">
             <div class="current-card-header-left">
-                <span v-if="!propDayForecast" style="font-size: x-large;">Daily Weather:</span>
+                <span v-if="!propDayForecast" style="font-size: x-large;">Today's Weather:</span>
                 <span style="font-size: x-large; color: var(--main-header-color);">{{ findDay()[0] }}</span>
                 <span style="font-size: x-large;">{{ findDay()[1] }}</span>
             </div>
@@ -104,10 +104,8 @@ export default{
         forecastData(){return this.$store.getters.forecastDataGetter},
         dayForecast(){
             if(!this.propDayForecast){
-                console.log('state in computed', this.forecastData.forecast.forecastday[0])
                 return this.forecastData.forecast.forecastday[0]
             }else{
-                console.log('prop in computed', this.propDayForecast)
                 return this.propDayForecast
             }
         }
