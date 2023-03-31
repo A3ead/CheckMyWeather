@@ -77,17 +77,16 @@ export default{
     },
     methods:{
         findDay(){
-            console.log('findDay')
+            let currentDay = ''
             if(!this.dayForecast){
                 this.currentDate = this.forecastData.current.last_updated
             }else{
                 this.currentDate = this.dayForecast.date
             }
-
-            this.currentDay = new Date(this.currentDate)
-            const currentDateFormated = this.formatDate( this.currentDay)
+            currentDay = new Date(this.currentDate)
+            const currentDateFormated = this.formatDate( currentDay)
             let daysOfWeek = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-            let currentDayOfWeek = daysOfWeek[ this.currentDay.getDay()]
+            let currentDayOfWeek = daysOfWeek[currentDay.getDay()]
             return [currentDayOfWeek, currentDateFormated]
         },
         formatDate(InputDate){
