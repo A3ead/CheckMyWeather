@@ -1,6 +1,6 @@
 <template>
   <div v-if="forecastData.forecast" class="cards-container">
-    <div v-for="day in forecastData.forecast.forecastday" :key="day"><DayWeatherCard :dayForecast="day"/></div>
+    <div v-for="day in forecastData.forecast.forecastday" :key="day"><DayWeatherCard :propDayForecast="day"/></div>
   </div>
 
 
