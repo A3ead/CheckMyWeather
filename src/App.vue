@@ -5,6 +5,7 @@
       <div class="website-title">CheckMyWeather</div>
       <div id="nav" class="header-menu">
         <RouterLink class="menu-item" to="/">Current</RouterLink>
+        <RouterLink class="menu-item" to="/Daily">Daily</RouterLink>
         <!-- <RouterLink class="menu-item" to="/daily">Daily</RouterLink> -->
       </div>
     </div>

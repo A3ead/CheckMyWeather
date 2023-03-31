@@ -65,18 +65,29 @@
 
 
 export default{
+    props:{
+        dayForecast: {}
+    },
     data(){
         return{
-            
+            forecast:{},
+            currentDate:'',
+            currentDay:''
         }
     },
     methods:{
         findDay(){
-            let currentDate = this.forecastData.current.last_updated
-            let currentDay = new Date(currentDate)
-            const currentDateFormated = this.formatDate(currentDay)
+            console.log('findDay')
+            if(!this.dayForecast){
+                this.currentDate = this.forecastData.current.last_updated
+            }else{
+                this.currentDate = this.dayForecast.date
+            }
+
+            this.currentDay = new Date(this.currentDate)
+            const currentDateFormated = this.formatDate( this.currentDay)
             let daysOfWeek = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-            let currentDayOfWeek = daysOfWeek[currentDay.getDay()]
+            let currentDayOfWeek = daysOfWeek[ this.currentDay.getDay()]
             return [currentDayOfWeek, currentDateFormated]
         },
         formatDate(InputDate){
@@ -92,7 +103,11 @@ export default{
         }
     },
     mounted(){
-
+        // if(!this.dayForecast){
+        //     this.forecast = this.forecastData
+        // }else{
+        //     this.forecast = this.dayForecast
+        // }
     },
     computed:{
         forecastData(){return this.$store.getters.forecastDataGetter}
