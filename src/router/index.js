@@ -13,6 +13,11 @@ const router = createRouter({
       path: '/daily',
       name: 'daily',
       component: () => import('../views/DailyView.vue')
+    },
+    {
+      path: '/hourly',
+      name: 'hourly',
+      component: () => import('../views/HourlyView.vue')
     }
   ]
 })
