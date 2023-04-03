@@ -83,16 +83,15 @@ body::-webkit-scrollbar-thumb:hover{
 .hourly-list-parent::-webkit-scrollbar{
   background-color: #f7f6fb00;
   width: 0.4rem;
-
 }
 .hourly-list-parent::-webkit-scrollbar-thumb{
   background-color: var( --main-header-color);
   border-radius: 7px;
+
 }
 .hourly-list-parent::-webkit-scrollbar-thumb:hover{
   background-color: var( --main-header-color);
 }
-
 
 
 .website-header {   

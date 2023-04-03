@@ -9,7 +9,12 @@
                 <div class="hourly-list-header-tab" id="after-tomorrow" @click="highlightTab('after-tomorrow', 'hourly-list-header-tab')">Monday</div>
             </div>
             <div class="hourly-list-parent">
-                <div class="hourly-list-element" :id="'hour'+ hourIndex" @click="highlightTab('hour'+ hourIndex, 'hourly-list-element')" v-for="(hourElement, hourIndex) in forecastData.forecast.forecastday[dayIndex].hour" :key="hourElement">{{ hourElement.time }}</div>
+                <div class="hourly-list-element" :id="'hour'+ hourIndex" @click="highlightTab('hour'+ hourIndex, 'hourly-list-element')" v-for="(hourElement, hourIndex) in forecastData.forecast.forecastday[dayIndex].hour" :key="hourElement">
+                  <span>{{ hourElement.time.slice(-5) }}</span>
+                  <img class="hourly-list-img" v-bind:src="hourElement.condition.icon">
+                  <span>Current Temp.: {{ hourElement.temp_c }} °C</span>
+                  <span>Real Feel: {{ hourElement.feelslike_c }} °C</span>
+                </div>
             </div>
         </div>
         <div class="hourly-card-container"></div>
@@ -32,6 +37,13 @@
         return{
             dayIndex:0
         }
+    },
+    watch:{
+      // forecastData(new_,old){
+      //   console.log('ih')
+      //   this.highlightTab('today', 'hourly-list-header-tab')
+      //   this.highlightTab('hour'+ this.findCurrentHourIndex(), 'hourly-list-element')
+      // }
     },
     methods:{
       highlightTab(tabId, tabClassName){
