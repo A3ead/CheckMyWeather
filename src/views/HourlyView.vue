@@ -4,16 +4,17 @@
       <div class="list-and-card-container">
         <div class="hourly-list-container">
             <div class="hourly-list-header">
-                <div class="hourly-list-header-tab" id="today" @click="highlightTab('today', 'hourly-list-header-tab')">Today</div>
-                <div class="hourly-list-header-tab" id="tomorrow" @click="highlightTab('tomorrow', 'hourly-list-header-tab')">Tomorrow</div>
-                <div class="hourly-list-header-tab" id="after-tomorrow" @click="highlightTab('after-tomorrow', 'hourly-list-header-tab')">Monday</div>
+                <div class="hourly-list-header-tab" id="today" @click="dayIndex = 0, highlightTab('today', 'hourly-list-header-tab')">Today</div>
+                <div class="hourly-list-header-tab" id="tomorrow" @click="dayIndex = 1, highlightTab('tomorrow', 'hourly-list-header-tab')">Tomorrow</div>
+                <div class="hourly-list-header-tab" id="after-tomorrow" @click="dayIndex = 2,highlightTab('after-tomorrow', 'hourly-list-header-tab')">Monday</div>
             </div>
             <div class="hourly-list-parent">
-                <div class="hourly-list-element" :id="'hour'+ hourIndex" @click="highlightTab('hour'+ hourIndex, 'hourly-list-element')" v-for="(hourElement, hourIndex) in forecastData.forecast.forecastday[dayIndex].hour" :key="hourElement">
+                <div class="hourly-list-element" :id="'hour'+ setId(hourElement)" @click="highlightTab('hour'+ setId(hourElement), 'hourly-list-element')" v-for="hourElement in forecastData.forecast.forecastday[dayIndex].hour" :key="hourElement">
                   <span>{{ hourElement.time.slice(-5) }}</span>
                   <img class="hourly-list-img" v-bind:src="hourElement.condition.icon">
                   <span>Current Temp.: {{ hourElement.temp_c }} °C</span>
                   <span>Real Feel: {{ hourElement.feelslike_c }} °C</span>
+                  <font-awesome-icon icon="fa-solid fa-angle-right" />
                 </div>
             </div>
         </div>
@@ -39,19 +40,43 @@
         }
     },
     watch:{
-      // forecastData(new_,old){
-      //   console.log('ih')
-      //   this.highlightTab('today', 'hourly-list-header-tab')
-      //   this.highlightTab('hour'+ this.findCurrentHourIndex(), 'hourly-list-element')
-      // }
+      forecastData(new_,old){
+        this.dayIndex = 0
+        this.$nextTick(()=>{
+          console.log('hi watcher')
+          this.highlightTab('today', 'hourly-list-header-tab')
+          this.highlightTab('hour'+ this.findCurrentHourIndex(), 'hourly-list-element')
+
+        })
+      },
+      dayIndex(new_,old){
+        this.$nextTick(()=>{
+          console.log('hi watcher2')
+          this.highlightTab('hour'+ this.findCurrentHourIndex(), 'hourly-list-element')
+          let selectedDiv = document.getElementsByClassName('hourly-list-element-selected')[0]
+          selectedDiv.scrollIntoView()
+        })
+      }
     },
     methods:{
+      listToRender(){
+        if(this.dayIndex == 0){
+          return this.forecastData.forecast.forecastday[this.dayIndex].hour.slice(this.findCurrentHourIndex())
+        }else{
+          return this.forecastData.forecast.forecastday[this.dayIndex].hour
+        }
+      },
+
+      setId(hourElement){
+        let id = hourElement.time.slice(-5,-3)
+        //console.log(id)
+        return id
+      },
       highlightTab(tabId, tabClassName){
         try {
           if(document.getElementsByClassName(tabClassName + '-selected')[0]){
             document.getElementsByClassName(tabClassName + '-selected')[0].className = tabClassName
           }
-
         }
         catch(error) {
             console.log(error)
@@ -64,17 +89,26 @@
         }
       },
       findCurrentHourIndex(){
-        return this.forecastData.forecast.forecastday[0].hour.findIndex(el => el.time.slice(0,-3) == this.forecastData.current.last_updated.slice(0,-3))
+        if(this.dayIndex == 0){
+          const hourIndex = this.forecastData.forecast.forecastday[this.dayIndex].hour.findIndex(el => el.time.slice(-5,-3) == this.forecastData.current.last_updated.slice(-5,-3))
+          return  this.forecastData.forecast.forecastday[this.dayIndex].hour[hourIndex].time.slice(-5,-3)
+        }else{
+          return '00'
+        }
+
       }
     },
     mounted(){
-      let checker = setInterval(()=>{
+      this.$nextTick(()=>{
+        console.log('hi mounted')
+        this.highlightTab('today', 'hourly-list-header-tab')
         if(Object.hasOwn(this.forecastData,'forecast')){
-          this.highlightTab('today', 'hourly-list-header-tab')
+        console.log('hi mounted2')
           this.highlightTab('hour'+ this.findCurrentHourIndex(), 'hourly-list-element')
-          clearInterval(checker)
-      }
-      },100)
+          let selectedDiv = document.getElementsByClassName('hourly-list-element-selected')[0]
+          selectedDiv.scrollIntoView()
+        }
+      })
     },
     computed:{
       forecastData(){return this.$store.getters.forecastDataGetter}
