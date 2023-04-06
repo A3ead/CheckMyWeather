@@ -199,14 +199,29 @@ body {
   justify-content: space-evenly;
   align-items: center;
   height: 822px;
+  min-width: 575px;
 }
 
 .list-and-card-container{
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  justify-content: space-evenly;
   width: 100%;
   height: 88%;
+  align-items: center;
+}
+
+.hourly-card-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 88%;
+  width: 50%;
+}
+
+.hourly-card{
+  height: 94%;
+  width: 44.5%;
+  min-width: 235px;
 }
 
 .hourly-list-container{
@@ -214,6 +229,7 @@ body {
   flex-direction: column;
   width: 50%;
   align-items: center;
+  height: 84%;
 }
 
 .hourly-list-header{
@@ -238,11 +254,6 @@ body {
 }
 
 .hourly-list-header-tab-selected{
-  /* border: solid 2px var(--main-header-color);
-  border-top: none;
-  border-bottom: none;
-  border-radius: 5px 5px 0px 0px;
-  padding: 15px 13px; */
   background-color: var(--main-header-color);
 }
 
@@ -254,6 +265,7 @@ body {
   max-height: 500px;
   width: 50%;
   direction: rtl;
+  min-width: 300px;
 }
 
 .hourly-list-element, .hourly-list-element-selected{

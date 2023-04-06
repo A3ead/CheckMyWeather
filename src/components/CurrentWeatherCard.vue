@@ -45,7 +45,8 @@ import day_date_mixin from '../mixins/day_date_mixin'
 
 export default{
     props:{
-        
+        hourIndex: '',
+        dayIndex: ''
     },
     data(){
         return{
@@ -60,7 +61,14 @@ export default{
 
     },
     computed:{
-        forecastData(){return this.$store.getters.forecastDataGetter}
+        forecastData(){return this.$store.getters.forecastDataGetter},
+        hourForecast(){
+            if(!this.hourIndex){
+                return this.forecastData.current
+            }else{
+                return this.forecastData.forecastday[this.dayIndex].hour[this.hourIndex]
+            }
+        }
     }
 }
 

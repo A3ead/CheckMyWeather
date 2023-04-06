@@ -8,9 +8,7 @@ export default{
             }else{
                 currentDate = inputData.current.last_updated
             }
-            console.log(currentDate)
             let currentDay = new Date(currentDate)
-            console.log(currentDay)
             const currentDateFormated = this.formatDate( currentDay)
             let daysOfWeek = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
             let currentDayOfWeek = daysOfWeek[currentDay.getDay()]
