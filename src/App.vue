@@ -47,7 +47,7 @@ export default{
         const request = await fetch(`/api/getWeather?q=${city}`)
         const response = await request.json()
         this.$store.commit('changeForecastData', response)
-        console.log(response)
+        //console.log(response)
       },
         
       async citySearch(searchQuery){

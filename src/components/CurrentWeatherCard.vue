@@ -4,7 +4,7 @@
             <div class="current-card-header-left">
                 <span style="font-size: x-large;">Current Weather:</span>
                 <span style="font-size: x-large; color: var(--main-header-color);">{{ forecastData.location.name }}, {{ forecastData.location.country}}</span>
-                <span style="font-size: x-large;">{{ findDay()[1] }}</span>
+                <span style="font-size: x-large;">{{ findDay(forecastData)[1] }}</span>
             </div>
             <div class="current-card-header-right">
                 <div class="current-card-img-container">
@@ -41,6 +41,7 @@
 
 <script>
 
+import day_date_mixin from '../mixins/day_date_mixin'
 
 export default{
     props:{
@@ -51,26 +52,8 @@ export default{
             
         }
     },
+    mixins:[day_date_mixin],
     methods:{
-        findDay(){
-            let currentDate = this.forecastData.current.last_updated
-            let currentDay = new Date(currentDate)
-            const currentDateFormated = this.formatDate(currentDay)
-            let daysOfWeek = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-            let currentDayOfWeek = daysOfWeek[currentDay.getDay()]
-            return [currentDayOfWeek, currentDateFormated]
-        },
-        formatDate(InputDate){
-            const yyyy = InputDate.getFullYear();
-            let mm = InputDate.getMonth() + 1; // Months start at 0!
-            let dd = InputDate.getDate();
-
-            if (dd < 10) dd = '0' + dd;
-            if (mm < 10) mm = '0' + mm;
-
-            const formattedDate = dd + '.' + mm + '.' + yyyy;
-            return formattedDate
-        }
 
     },
     mounted(){

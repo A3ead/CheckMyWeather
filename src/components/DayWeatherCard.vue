@@ -3,8 +3,8 @@
         <div class="current-card-header">
             <div class="current-card-header-left">
                 <span v-if="!propDayForecast" style="font-size: x-large;">Today's Weather:</span>
-                <span style="font-size: x-large; color: var(--main-header-color);">{{ findDay()[0] }}</span>
-                <span style="font-size: x-large;">{{ findDay()[1] }}</span>
+                <span style="font-size: x-large; color: var(--main-header-color);">{{ findDay(dayForecast)[0] }}</span>
+                <span style="font-size: x-large;">{{ findDay(dayForecast)[1] }}</span>
             </div>
             <div class="current-card-header-right">
                 <div class="current-card-img-container">
@@ -63,6 +63,7 @@
 
 <script>
 
+import day_date_mixin from '../mixins/day_date_mixin'
 
 export default{
     props:{
@@ -75,27 +76,9 @@ export default{
             currentDay:''
         }
     },
+    mixins:[day_date_mixin],
     methods:{
-        findDay(){
-            let currentDay = ''
-            this.currentDate = this.dayForecast.date
-            currentDay = new Date(this.currentDate)
-            const currentDateFormated = this.formatDate( currentDay)
-            let daysOfWeek = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-            let currentDayOfWeek = daysOfWeek[currentDay.getDay()]
-            return [currentDayOfWeek, currentDateFormated]
-        },
-        formatDate(InputDate){
-            const yyyy = InputDate.getFullYear();
-            let mm = InputDate.getMonth() + 1; // Months start at 0!
-            let dd = InputDate.getDate();
-
-            if (dd < 10) dd = '0' + dd;
-            if (mm < 10) mm = '0' + mm;
-
-            const formattedDate = dd + '.' + mm + '.' + yyyy;
-            return formattedDate
-        }
+ 
     },
     mounted(){
 
