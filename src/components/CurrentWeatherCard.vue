@@ -2,17 +2,18 @@
     <div v-if="forecastData.current" class="current-card-container">
         <div class="current-card-header">
             <div class="current-card-header-left">
-                <span style="font-size: x-large;">Current Weather:</span>
+                <span v-if="!hourIndex && this.hourIndex !== 0" style="font-size: x-large;">Current Weather:</span>
+                <span v-else style="font-size: x-large;">Time: {{ findCurrentTime() }}</span>
                 <span style="font-size: x-large; color: var(--main-header-color);">{{ forecastData.location.name }}, {{ forecastData.location.country}}</span>
-                <span style="font-size: x-large;">{{ findDay(forecastData)[1] }}</span>
+                <span style="font-size: x-large;">{{ findDay(findDayParameter())[1] }}</span>
             </div>
             <div class="current-card-header-right">
                 <div class="current-card-img-container">
-                    <img class="current-card-img" v-bind:src="forecastData.current.condition.icon">
+                    <img class="current-card-img" v-bind:src="hourForecast.condition.icon">
                 </div>
                 <div class="current-card-temp">
-                    <span>Current Temp.: {{forecastData.current.temp_c}} °C</span>
-                    <span>Real Feel: {{forecastData.current.feelslike_c}} °C</span>
+                    <span>Current Temp.: {{hourForecast.temp_c}} °C</span>
+                    <span>Real Feel: {{hourForecast.feelslike_c}} °C</span>
                 </div>
             </div>
         </div>
@@ -27,12 +28,12 @@
             <span>Pressure:</span>
         </div>
         <div class="current-card-bottom-right">
-            <span>{{forecastData.current.precip_mm}} mm</span>
-            <span>{{forecastData.current.humidity}}%</span>
-            <span>{{forecastData.current.wind_kph}} km/h</span>
-            <span>{{forecastData.current.wind_dir}}</span>
-            <span>{{forecastData.current.vis_km}} km</span>
-            <span>{{forecastData.current.pressure_mb}} mb</span>
+            <span>{{hourForecast.precip_mm}} mm</span>
+            <span>{{hourForecast.humidity}}%</span>
+            <span>{{hourForecast.wind_kph}} km/h</span>
+            <span>{{hourForecast.wind_dir}}</span>
+            <span>{{hourForecast.vis_km}} km</span>
+            <span>{{hourForecast.pressure_mb}} mb</span>
         </div>
         </div>
 
@@ -40,7 +41,6 @@
 </template>
 
 <script>
-
 import day_date_mixin from '../mixins/day_date_mixin'
 
 export default{
@@ -54,8 +54,19 @@ export default{
         }
     },
     mixins:[day_date_mixin],
+    watch:{
+    },
     methods:{
-
+        findDayParameter(){
+            if(!this.hourIndex && this.hourIndex !== 0){
+                return this.forecastData
+            }else{
+                return this.forecastData.forecast.forecastday[this.dayIndex]
+            }
+        },
+        findCurrentTime(){
+            return this.hourForecast.time.slice(-5) 
+        },
     },
     mounted(){
 
@@ -63,10 +74,10 @@ export default{
     computed:{
         forecastData(){return this.$store.getters.forecastDataGetter},
         hourForecast(){
-            if(!this.hourIndex){
+            if(!this.hourIndex && this.hourIndex !== 0){
                 return this.forecastData.current
             }else{
-                return this.forecastData.forecastday[this.dayIndex].hour[this.hourIndex]
+                return this.forecastData.forecast.forecastday[this.dayIndex].hour[this.hourIndex]
             }
         }
     }

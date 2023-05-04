@@ -239,6 +239,7 @@ body {
   border: solid 2px var(--main-header-color);
   border-radius: 7px 7px 5px 5px;
   border-top: none;
+  box-shadow: 0px 0px 5px black;
 }
 
 .hourly-list-header-tab, .hourly-list-header-tab-selected{
@@ -266,6 +267,8 @@ body {
   width: 50%;
   direction: rtl;
   min-width: 300px;
+  box-shadow: 0px 0px 15px black;
+
 }
 
 .hourly-list-element, .hourly-list-element-selected{

@@ -5,8 +5,8 @@
         <div class="hourly-list-container">
             <div class="hourly-list-header">
                 <div class="hourly-list-header-tab" id="today" @click="dayIndex = 0, highlightTab('today', 'hourly-list-header-tab')">Today</div>
-                <div class="hourly-list-header-tab" id="tomorrow" @click="dayIndex = 1, highlightTab('tomorrow', 'hourly-list-header-tab')">Tomorrow</div>
-                <div class="hourly-list-header-tab" id="after-tomorrow" @click="dayIndex = 2,highlightTab('after-tomorrow', 'hourly-list-header-tab')">{{ findDay(forecastData)[0] }}</div>
+                <div class="hourly-list-header-tab" id="tomorrow" @click="dayIndex = 1, selectedHourIndex=0, highlightTab('tomorrow', 'hourly-list-header-tab')">Tomorrow</div>
+                <div class="hourly-list-header-tab" id="after-tomorrow" @click="dayIndex = 2, selectedHourIndex=0,highlightTab('after-tomorrow', 'hourly-list-header-tab')">{{ findDay(forecastData)[0] }}</div>
             </div>
             <div class="hourly-list-parent">
                 <div class="hourly-list-element" :id="'hour'+ setId(hourElement)" @click="highlightTab('hour'+ setId(hourElement), 'hourly-list-element'), selectedHourIndex=hourIndex" v-for="hourElement, hourIndex in forecastData.forecast.forecastday[dayIndex].hour" :key="hourElement">
@@ -47,6 +47,7 @@ export default{
   watch:{
     forecastData(new_,old){
       this.dayIndex = 0
+      this.selectedHourIndex = this.forecastData.forecast.forecastday[this.dayIndex].hour.findIndex(el => el.time.slice(-5,-3) == this.forecastData.current.last_updated.slice(-5,-3))
       this.$nextTick(()=>{
         this.highlightTab('today', 'hourly-list-header-tab')
         this.highlightTab('hour'+ this.findCurrentHourIndex(), 'hourly-list-element')
@@ -55,6 +56,9 @@ export default{
       })
     },
     dayIndex(new_,old){
+      if(new_ == 0){
+        this.selectedHourIndex = this.forecastData.forecast.forecastday[new_].hour.findIndex(el => el.time.slice(-5,-3) == this.forecastData.current.last_updated.slice(-5,-3))
+      }
       this.$nextTick(()=>{
         this.highlightTab('hour'+ this.findCurrentHourIndex(), 'hourly-list-element')
         let selectedDiv = document.getElementsByClassName('hourly-list-element-selected')[0]
@@ -106,7 +110,6 @@ export default{
     this.$nextTick(()=>{
       this.highlightTab('today', 'hourly-list-header-tab')
       if(Object.hasOwn(this.forecastData,'forecast')){
-        console.log('hi')
         this.highlightTab('hour'+ this.findCurrentHourIndex(), 'hourly-list-element')
         let selectedDiv = document.getElementsByClassName('hourly-list-element-selected')[0]
         selectedDiv.scrollIntoView()
