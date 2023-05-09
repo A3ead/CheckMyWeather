@@ -10,13 +10,23 @@
         <!-- <RouterLink class="menu-item" to="/daily">Daily</RouterLink> -->
       </div>
     </div>
+    <div class="search-and-toggles-parent">
       <div id='search-dropdown-parent' class="search-dropdown-parent">
         <input type="text" id='search' :class="[{'search-input-focus':searchDropDown},'search-input']" v-model="userInput" autocomplete = 'off' @keydown.enter="sendSearch()" placeholder="Search City ..">
         <div v-if="searchDropDown==true" class="search-dropdown" tabindex="0">
           <div @click="getForecast(city.name + ', ' + city.country)" class="search-dropdown-result" v-for="city in searchResults" :key="city">{{city.name}}, {{city.country}}</div>
         </div>
       </div>
-
+      <div class="dark-mode-toggle-switch">
+           <font-awesome-icon icon="fa-solid fa-sun" />
+          <label class="switch" @change="darkModeToggle()">
+            <input id="darkmode-checkbox" type="checkbox">
+            <span class="slider round"></span>
+          </label>
+          <font-awesome-icon icon="fa-solid fa-moon" />
+           <!-- <Font-awesome-icon :icon="awesomeIcons.faMoon" /> -->
+      </div>
+    </div>
   </div>
 
     <!-- <nav>
@@ -66,6 +76,45 @@ export default{
         console.log(this.userInput)
         await this.citySearch(this.userInput)
         this.getForecast(this.searchResults[0].name)
+      },
+
+      darkModeToggle(){
+        function setPropertyLeDocument(varName, value){
+          document.documentElement.style.setProperty(varName, value)
+        }
+        if(this.darkMode == false)
+        {
+          
+          setPropertyLeDocument('--main-background-color','linear-gradient(130deg,#2a2d35,#2f323b 60%,#464b58 85%)')
+          setPropertyLeDocument('--main-card-bg-color','#2c2f38')
+          setPropertyLeDocument('--main-text-color','#F3F3F3')
+          setPropertyLeDocument('--main-darkmode-icon-color','#FFFFFF')
+          setPropertyLeDocument('--text-highlight-color','#27272a82')
+          setPropertyLeDocument('--tabs-hover-color','#3a415499')
+
+
+          
+          //console.log("should be dark")
+          this.darkMode = true
+          localStorage.setItem("darkMode",true)
+        }
+        else
+        {
+          
+          setPropertyLeDocument('--main-background-color','linear-gradient(130deg,#f1f1f1,#d5d0c7 60%,#cdbbabd6 85%)')
+          setPropertyLeDocument('--main-card-bg-color','#eae9e7')
+          setPropertyLeDocument('--main-text-color','#2c3e50')
+          setPropertyLeDocument('--main-darkmode-icon-color','#1F1E1F')
+          setPropertyLeDocument('--text-highlight-color','#efb5996e')
+          setPropertyLeDocument('--tabs-hover-color','#e38080')
+
+
+          //console.log("should be light")
+          this.darkMode = false
+          localStorage.setItem("darkMode",false)
+
+        }
+        
       }
     },
     mounted(){
@@ -102,6 +151,14 @@ export default{
       this.searchDropDown = false  
     })
 
+    if (localStorage.getItem('darkMode') == 'false'){
+      this.darkMode = true
+    }
+    else{
+      this.darkMode = false
+      document.getElementById('darkmode-checkbox').checked = true
+    }
+    this.darkModeToggle()
     }
 }
 </script>
