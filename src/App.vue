@@ -17,7 +17,8 @@
           <div @click="getForecast(city.name + ', ' + city.country)" class="search-dropdown-result" v-for="city in searchResults" :key="city">{{city.name}}, {{city.country}}</div>
         </div>
       </div>
-      <div class="dark-mode-toggle-switch">
+      <div class="toggles-container">
+        <div class="dark-mode-toggle-switch">
            <font-awesome-icon icon="fa-solid fa-sun" />
           <label class="switch" @change="darkModeToggle()">
             <input id="darkmode-checkbox" type="checkbox">
@@ -25,7 +26,18 @@
           </label>
           <font-awesome-icon icon="fa-solid fa-moon" />
            <!-- <Font-awesome-icon :icon="awesomeIcons.faMoon" /> -->
+        </div>
+        <div class="dark-mode-toggle-switch">
+           <font-awesome-icon icon="fa-solid fa-sun" />
+          <label class="switch" @change="unitSystemToggle()">
+            <input id="unit-system-checkbox" type="checkbox">
+            <span class="slider round"></span>
+          </label>
+          <font-awesome-icon icon="fa-solid fa-moon" />
+           <!-- <Font-awesome-icon :icon="awesomeIcons.faMoon" /> -->
+        </div>
       </div>
+
     </div>
   </div>
 
@@ -49,6 +61,8 @@ export default{
           searchResults:[],
           userInput:'',
           timer:null,
+          darkMode: false,
+          isImperial: false
         }
     },
     methods:{
@@ -115,6 +129,19 @@ export default{
 
         }
         
+      },
+
+      unitSystemToggle(){
+        if(this.isImperial == false){
+          //console.log("should be dark")
+          this.isImperial = true
+          localStorage.setItem("isImperial", true)
+        }
+        else{
+          //console.log("should be light")
+          this.isImperial = false
+          localStorage.setItem("isImperial", false)
+        }
       }
     },
     mounted(){
@@ -151,7 +178,7 @@ export default{
       this.searchDropDown = false  
     })
 
-    if (localStorage.getItem('darkMode') == 'false'){
+    if(localStorage.getItem('darkMode') == 'false'){
       this.darkMode = true
     }
     else{
@@ -159,7 +186,23 @@ export default{
       document.getElementById('darkmode-checkbox').checked = true
     }
     this.darkModeToggle()
+
+    if(localStorage.getItem('isImperial') == 'true'){
+      console.log('false')
+      this.isImperial = false
+      document.getElementById('unit-system-checkbox').checked = true
     }
+    else{
+      console.log('not false')
+      this.isImperial = true
+
+    }
+    this.unitSystemToggle()
+
+  }
+
+
+
 }
 </script>
 
