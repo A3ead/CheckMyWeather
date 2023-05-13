@@ -263,16 +263,22 @@ body {
   background-color: var(--main-header-color);
 }
 
-
-.hourly-list-parent{
+.hourly-list-parent-container{
   display: flex;
   flex-direction: column;
+  align-items: flex-end;
+  padding: 2px 0px;
   overflow: auto;
   max-height: 500px;
   width: 50%;
   direction: rtl;
-  min-width: 300px;
-  box-shadow: 0px 0px 15px black;
+}
+
+.hourly-list-parent{
+  display: flex;
+  flex-direction: column;
+  max-height: 500px;
+  width: 90%;
 
 }
 
@@ -287,9 +293,13 @@ body {
   border-radius: 0px 0px 5px 5px;
   min-height: 7.5%;
   direction: ltr;
+  box-shadow: 0px 0px 10px black;
 }
 .hourly-list-element-selected{
   background-color: var(--main-header-color);
+  left: 12px;
+  position: relative;
+  border-radius: 5px;
   
 }
 .hourly-list-element:hover{

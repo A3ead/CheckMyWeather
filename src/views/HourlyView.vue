@@ -8,15 +8,20 @@
                 <div class="hourly-list-header-tab" id="tomorrow" @click="dayIndex = 1, selectedHourIndex=0, highlightTab('tomorrow', 'hourly-list-header-tab')">Tomorrow</div>
                 <div class="hourly-list-header-tab" id="after-tomorrow" @click="dayIndex = 2, selectedHourIndex=0,highlightTab('after-tomorrow', 'hourly-list-header-tab')">{{ findDay(forecastData)[0] }}</div>
             </div>
-            <div class="hourly-list-parent">
+            <div class="hourly-list-parent-container">
+              <div class="hourly-list-parent">
                 <div class="hourly-list-element" :id="'hour'+ setId(hourElement)" @click="highlightTab('hour'+ setId(hourElement), 'hourly-list-element'), selectedHourIndex=hourIndex" v-for="hourElement, hourIndex in forecastData.forecast.forecastday[dayIndex].hour" :key="hourElement">
                   <span>{{ hourElement.time.slice(-5) }}</span>
                   <img class="hourly-list-img" v-bind:src="hourElement.condition.icon">
-                  <span>Current Temp.: {{ hourElement.temp_c }} °C</span>
-                  <span>Real Feel: {{ hourElement.feelslike_c }} °C</span>
+                  <span v-if="!isImperial">Temperature: {{ hourElement.temp_c }} °C</span>
+                  <span v-if="!isImperial">Real Feel: {{ hourElement.feelslike_c }} °C</span>
+                  <span v-if="isImperial">Temperature: {{ hourElement.temp_f }} °F</span>
+                  <span v-if="isImperial">Real Feel: {{ hourElement.feelslike_f }} °F</span>
                   <font-awesome-icon icon="fa-solid fa-angle-right" />
                 </div>
+              </div>
             </div>
+
         </div>
         <div class="hourly-card-container">
           <CurrentWeatherCard :dayIndex="dayIndex" :hourIndex="selectedHourIndex" class="hourly-card"/>
@@ -110,6 +115,7 @@ export default{
     this.$nextTick(()=>{
       this.highlightTab('today', 'hourly-list-header-tab')
       if(Object.hasOwn(this.forecastData,'forecast')){
+        this.selectedHourIndex = this.forecastData.forecast.forecastday[this.dayIndex].hour.findIndex(el => el.time.slice(-5,-3) == this.forecastData.current.last_updated.slice(-5,-3))
         this.highlightTab('hour'+ this.findCurrentHourIndex(), 'hourly-list-element')
         let selectedDiv = document.getElementsByClassName('hourly-list-element-selected')[0]
         selectedDiv.scrollIntoView()
@@ -118,7 +124,9 @@ export default{
 
   },
   computed:{
-    forecastData(){return this.$store.getters.forecastDataGetter}
+    forecastData(){return this.$store.getters.forecastDataGetter},
+    isImperial(){return this.$store.getters.isImperialGetter}
+
   }
 }
 

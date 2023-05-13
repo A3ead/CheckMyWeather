@@ -25,16 +25,14 @@
             <span class="slider round"></span>
           </label>
           <font-awesome-icon icon="fa-solid fa-moon" />
-           <!-- <Font-awesome-icon :icon="awesomeIcons.faMoon" /> -->
         </div>
         <div class="dark-mode-toggle-switch">
-           <font-awesome-icon icon="fa-solid fa-sun" />
+          <span class="unit-system-toggle-symbol">°C</span>
           <label class="switch" @change="unitSystemToggle()">
             <input id="unit-system-checkbox" type="checkbox">
             <span class="slider round"></span>
           </label>
-          <font-awesome-icon icon="fa-solid fa-moon" />
-           <!-- <Font-awesome-icon :icon="awesomeIcons.faMoon" /> -->
+          <span class="unit-system-toggle-symbol">°F</span>
         </div>
       </div>
 
@@ -136,11 +134,13 @@ export default{
           //console.log("should be dark")
           this.isImperial = true
           localStorage.setItem("isImperial", true)
+          this.$store.commit('changeIsImperial', true)
         }
         else{
           //console.log("should be light")
           this.isImperial = false
           localStorage.setItem("isImperial", false)
+          this.$store.commit('changeIsImperial', false)
         }
       }
     },

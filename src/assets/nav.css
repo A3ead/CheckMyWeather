@@ -93,6 +93,19 @@ body::-webkit-scrollbar-thumb:hover{
   background-color: var( --main-header-color);
 }
 
+.hourly-list-parent-container::-webkit-scrollbar{
+  background-color: #f7f6fb00;
+  width: 0.4rem;
+}
+.hourly-list-parent-container::-webkit-scrollbar-thumb{
+  background-color: var( --main-header-color);
+  border-radius: 7px;
+
+}
+.hourly-list-parent-container::-webkit-scrollbar-thumb:hover{
+  background-color: var( --main-header-color);
+}
+
 
 .website-header {   
     background-color: rgb(219, 94, 94);
@@ -132,14 +145,19 @@ body::-webkit-scrollbar-thumb:hover{
 .search-and-toggles-parent{
   width: 50%;
   display: flex;
-
+  align-items: center;
+}
+.toggles-container{
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
 }
 .dark-mode-toggle-switch{
   color: var(--main-darkmode-icon-color);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 85px;
+  width: 92px;
 }
 
 .switch {
@@ -213,10 +231,17 @@ body::-webkit-scrollbar-thumb:hover{
   transform: translateX(17px);
 }
 
+.unit-system-toggle-symbol{
+  font-size: larger;
+  font-weight: 500;
+  text-decoration: solid;
+}
+
 .search-dropdown-parent{
   width: 50%;
   display: flex;
   position: relative;
+  height: 42px;
 }
 
 .search-dropdown{

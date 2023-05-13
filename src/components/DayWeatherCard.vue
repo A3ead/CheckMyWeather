@@ -10,8 +10,11 @@
                 <div class="current-card-img-container">
                     <img class="current-card-img" v-bind:src="dayForecast.day.condition.icon">
                 </div>
-                <div class="daily-card-temp">
+                <div v-if="!isImperial" class="daily-card-temp">
                     <span>{{dayForecast.day.maxtemp_c}} / {{dayForecast.day.mintemp_c}} °C</span>
+                </div>
+                <div v-else class="daily-card-temp">
+                    <span>{{dayForecast.day.maxtemp_f}} / {{dayForecast.day.mintemp_f}} °F</span>
                 </div>
             </div>
         </div>
@@ -27,12 +30,21 @@
                     <span>Chance of Rain:</span>
                     <span>Chance of Snow:</span>
                 </div>
-                <div class="daily-card-bottom-right">
+                <div v-if="!isImperial" class="daily-card-bottom-right">
                     <span>{{dayForecast.day.avgtemp_c}} °C</span>
                     <span>{{dayForecast.day.totalprecip_mm}} mm</span>
                     <span>{{dayForecast.day.avghumidity}}%</span>
                     <span>{{dayForecast.day.maxwind_kph}} km/h</span>
                     <span>{{dayForecast.day.avgvis_km}} km</span>
+                    <span>{{dayForecast.day.daily_chance_of_rain}}%</span>
+                    <span>{{dayForecast.day.daily_chance_of_snow}}%</span>
+                </div>
+                <div v-else class="daily-card-bottom-right">
+                    <span>{{dayForecast.day.avgtemp_f}} °F</span>
+                    <span>{{dayForecast.day.totalprecip_in}} in</span>
+                    <span>{{dayForecast.day.avghumidity}}%</span>
+                    <span>{{dayForecast.day.maxwind_mph}} mph</span>
+                    <span>{{dayForecast.day.avgvis_miles}} mi</span>
                     <span>{{dayForecast.day.daily_chance_of_rain}}%</span>
                     <span>{{dayForecast.day.daily_chance_of_snow}}%</span>
                 </div>
@@ -91,8 +103,8 @@ export default{
             }else{
                 return this.propDayForecast
             }
-        }
-        
+        },
+        isImperial(){return this.$store.getters.isImperialGetter}   
 
     }
 }

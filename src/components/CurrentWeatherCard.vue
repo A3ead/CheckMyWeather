@@ -11,11 +11,11 @@
                 <div class="current-card-img-container">
                     <img class="current-card-img" v-bind:src="hourForecast.condition.icon">
                 </div>
-                <div v-if="isImperial==false" class="current-card-temp">
+                <div v-if="!isImperial" class="current-card-temp">
                     <span>Current Temp.: {{hourForecast.temp_c}} °C</span>
                     <span>Real Feel: {{hourForecast.feelslike_c}} °C</span>
                 </div>
-                <div v-if="isImperial==true" class="current-card-temp">
+                <div v-else class="current-card-temp">
                     <span>Current Temp.: {{hourForecast.temp_f}} °F</span>
                     <span>Real Feel: {{hourForecast.feelslike_f}} °F</span>
                 </div>
@@ -92,7 +92,7 @@ export default{
                 return this.forecastData.forecast.forecastday[this.dayIndex].hour[this.hourIndex]
             }
         },
-        isImperial(){return JSON.parse(localStorage.getItem('isImperial'))}
+        isImperial(){return this.$store.getters.isImperialGetter}
     }
 }
 
