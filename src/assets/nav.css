@@ -117,7 +117,7 @@ body::-webkit-scrollbar-thumb:hover{
     position: sticky;
     top: 0px;
     z-index: 999;
-    height: 65px;
+    height: 60px;
     min-width: 950px;
 }
 
@@ -299,4 +299,13 @@ body::-webkit-scrollbar-thumb:hover{
 .search-input:focus{
     outline: none;
     width: 400px;
+}
+
+.website-footer{
+  display: flex;
+  width: 100%;
+  border-top: 1px solid var(--main-header-color);
+  justify-content: center;
+  align-items: center;
+  height: 75px;
 }

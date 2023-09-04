@@ -43,6 +43,10 @@
         <RouterLink to="/">Home</RouterLink>
       </nav> -->
   <RouterView />
+
+  <div class="website-footer">Powered by <a style="margin-left: 3px; color: var(--main-header-color);" href="https://www.weatherapi.com/" title="Free Weather API">WeatherAPI.com</a><a style="margin-left: 15px;" href="https://www.weatherapi.com/" title="Free Weather API"><img src='//cdn.weatherapi.com/v4/images/weatherapi_logo.png' alt="Weather data by WeatherAPI.com"></a></div>
+  
+  
 </template>
 
 
@@ -113,7 +117,7 @@ export default{
         else
         {
           
-          setPropertyLeDocument('--main-background-color','linear-gradient(130deg,#f1f1f1,#d5d0c7 60%,#cdbbabd6 85%)')
+          setPropertyLeDocument('--main-background-color','rgb(235, 234, 232)')
           setPropertyLeDocument('--main-card-bg-color','#eae9e7')
           setPropertyLeDocument('--main-text-color','#2c3e50')
           setPropertyLeDocument('--main-darkmode-icon-color','#1F1E1F')
@@ -179,11 +183,18 @@ export default{
     })
 
     if(localStorage.getItem('darkMode') == 'false'){
+      console.log('hii')
       this.darkMode = true
     }
-    else{
+    else if(localStorage.getItem('darkMode') == 'true'){
+      console.log('hiii')
       this.darkMode = false
       document.getElementById('darkmode-checkbox').checked = true
+    }
+    else{
+      console.log('hiiii')
+      this.darkMode = true
+      document.getElementById('darkmode-checkbox').checked = false
     }
     this.darkModeToggle()
 
@@ -207,35 +218,6 @@ export default{
 </script>
 
 <style>
-/* header {
-  line-height: 1.5;
-  max-height: 100vh;
-}
 
-
-nav {
-  width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
-}
-
-nav a.router-link-exact-active {
-  color: var(--color-text);
-}
-
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
-}
-
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
-}
-
-nav a:first-of-type {
-  border: 0;
-} */
 
 </style>
